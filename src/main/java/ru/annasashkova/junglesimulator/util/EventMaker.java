@@ -16,7 +16,6 @@ public class EventMaker {
     // энергия = 0 тогда жизни = -30
 
     public void activateEvent(Capybara capybara){
-        Math.random();
         while(checkHealth(capybara)){
             int eventNumber = (int) (Math.random()*100);
             if(eventNumber>=0 && eventNumber<=14){
@@ -41,16 +40,18 @@ public class EventMaker {
                 death(capybara);
             }
         }
+        System.out.print("Вот так и закончилась жизнь капибары! Это была неплохая жизнь");
     }
 
     private void eatGrass(Capybara capybara){
         int energy = capybara.getEnergy();
-        energy = (int) (energy * capybara.foodPower);
+        energy = (int) (energy * capybara.foodPower+5);
         if(energy>100){
             energy = 100;
         }
         capybara.setEnergy(energy);
         System.out.println("Капибара стоит и вальяжно ест траву. Энергия пополнилась! Текущая энергия = " + capybara.getEnergy());
+        System.out.println("Текущее здоровье = " + capybara.getHealth());
     }
 
     private void eatFruit(Capybara capybara){
@@ -61,6 +62,7 @@ public class EventMaker {
         }
         capybara.setEnergy(energy);
         System.out.println("Капибара нашла фрукт водного растения, пока стояла в воде! Ура, она съела фрукт и попила воды. Два в одном! Энергия пополнилась! Текущая энергия = " + capybara.getEnergy());
+        System.out.println("Текущее здоровье = " + capybara.getHealth());
     }
 
     private void swim(Capybara capybara){
@@ -72,6 +74,7 @@ public class EventMaker {
         capybara.setEnergy(energy);
         checkEnergy(capybara);
         System.out.println("Капибара поплавала! -10 энергии! Текущая энергия = " + capybara.getEnergy());
+        System.out.println("Текущее здоровье = " + capybara.getHealth());
     }
 
     private void takeCareBabies(Capybara capybara){
@@ -89,7 +92,7 @@ public class EventMaker {
         }
         capybara.setHealth(health);
         System.out.println("Капибара позаботилась о своей потомстве! Какая хорошая капибара! -20 энергии Текущая энергия = " + capybara.getEnergy());
-        System.out.print("Любовь к семье придало смысла жизни! +10 к здоровью! Текущее здоровье = " + capybara.getHealth());
+        System.out.println("Любовь к семье придало смысла жизни! +10 к здоровью! Текущее здоровье = " + capybara.getHealth());
     }
 
     private void walk(Capybara capybara){
@@ -101,6 +104,7 @@ public class EventMaker {
         capybara.setEnergy(energy);
         checkEnergy(capybara);
         System.out.println("Капибара уверенно идет вперед! Бери с нее пример! -10 энергии Текущая энергия = " + capybara.getEnergy());
+        System.out.println("Текущее здоровье = " + capybara.getHealth());
     }
 
     private void fight(Capybara capybara){
@@ -112,16 +116,18 @@ public class EventMaker {
         capybara.setEnergy(energy);
         checkEnergy(capybara);
         System.out.println("О, нет! На капибару напал крокодил! Прийдется устроить бой на выживание! -40 энергии Текущая энергия = " + capybara.getEnergy());
+        System.out.println("Текущее здоровье = " + capybara.getHealth());
     }
 
     private void sleep(Capybara capybara){
         int energy = capybara.getEnergy();
-        energy = energy + 50;
+        energy = energy + 30;
         if( energy>100){
             energy = 100;
         }
         capybara.setEnergy(energy);
-        System.out.println("Капибара хорошо поспала! +50 энергии Текущая энергия = " + capybara.getEnergy());
+        System.out.println("Капибара хорошо поспала! +30 энергии Текущая энергия = " + capybara.getEnergy());
+        System.out.println("Текущее здоровье = " + capybara.getHealth());
     }
 
     private void flirt(Capybara capybara){
@@ -139,7 +145,7 @@ public class EventMaker {
         }
         capybara.setHealth(health);
         System.out.println("Время пофлиртовать с другой капибарой! Нелегкое это дело быть такой популярной капибарой! -10 энергии Текущая энергия = " + capybara.getEnergy());
-        System.out.print("Любовь к друг другу в стае! Вот что делает нас сильными! +20 здоровья Текущее здоровье = " + capybara.getHealth());
+        System.out.println("Любовь к друг другу в стае! Вот что делает нас сильными! +20 здоровья Текущее здоровье = " + capybara.getHealth());
     }
 
     private void run(Capybara capybara){
@@ -151,6 +157,7 @@ public class EventMaker {
         capybara.setEnergy(energy);
         checkEnergy(capybara);
         System.out.println("О, нет! За капибарой гонится дикая собака! Бежим! Бежим! Бежим! -20 энергии Текущая энергия = " + capybara.getEnergy());
+        System.out.println("Текущее здоровье = " + capybara.getHealth());
     }
 
     private void death(Capybara capybara){
@@ -160,10 +167,11 @@ public class EventMaker {
             health = 0;
         }
         capybara.setHealth(health);
-        System.out.print("К сожалению, капибару съел ягуар! Но такова жизнь... Капибара мертва!");
+        System.out.println("К сожалению, капибару съел ягуар! Но такова жизнь... Капибара мертва!");
     }
 
     private boolean checkHealth(Capybara capybara){
+        System.out.println("здоровье: " + capybara.getHealth() + " энергия: " + capybara.getEnergy());
         if(capybara.getHealth() <= 0){
             return false;
         } else {
@@ -173,7 +181,7 @@ public class EventMaker {
 
     private void checkEnergy(Capybara capybara) {
         if (capybara.getEnergy() <= 0) {
-            int health = capybara.getHealth() - 20;
+            int health = capybara.getHealth() - 40;
             if (health < 0) {
                 health = 0;
             }
