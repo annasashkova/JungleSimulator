@@ -39,6 +39,11 @@ public class EventMaker {
             }else if (eventNumber>=99 && eventNumber<=100){
                 death(capybara);
             }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
         System.out.print("Вот так и закончилась жизнь капибары! Это была неплохая жизнь");
     }

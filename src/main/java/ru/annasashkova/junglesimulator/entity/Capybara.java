@@ -21,6 +21,4 @@ public class Capybara {
     public int getEnergy(){
         return this.energy;
     }
-
-
 }
